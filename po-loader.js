@@ -4,8 +4,7 @@ const { parse } = require('ttag-cli/dist/src/lib/parser');
 const { iterateTranslations, convert2Compact } = require('ttag-cli/dist/src/lib/utils');
 
 module.exports = function po2json(source) {
-  //@ts-ignore
-  //this.cacheable();
+  this.cacheable();
 
   let poData = parse(source);
 

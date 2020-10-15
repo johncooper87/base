@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles1 from './styles1.css';
-import { t, addLocale, useLocale } from 'ttag';
+import { t, ngettext, msgid, addLocale, useLocale } from 'ttag';
 import { useUpdate } from './internals/react-update-hook';
 
 const localizationSubscribers = new Set<() => void>();
@@ -79,6 +79,7 @@ function App() {
   const a = 5;
 
   const [showComp1, setShowComp1] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
 
   return <div className={styles1.root1}>
     <div>
@@ -88,6 +89,10 @@ function App() {
     {t`Hello World!`}
     <div>
       <button onClick={() => setShowComp1(show => !show)}>{t`show comp1`}</button>
+    </div>
+    <div>
+      <button onClick={() => setClickCount(count => count + 1)}>{t`increase click count`}</button>
+      <div>{ngettext(msgid`${clickCount} click`, `${clickCount} clicks`, clickCount)}</div>
     </div>
     <Suspense fallback={<div>{t`loading ...`}</div>}>
       {showComp1 && <Comp1 />}

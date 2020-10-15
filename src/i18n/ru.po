@@ -15,10 +15,23 @@ msgstr "Привет всем!!!"
 msgid "show comp1"
 msgstr "показать комп1"
 
-#: src\index.tsx:93
+#: src\index.tsx:97
 msgid "loading ..."
 msgstr "загрузка ..."
 
 #: src\Comp1.tsx:10
 msgid "Again!!!"
 msgstr "Снова!!!"
+
+#: src\index.tsx:94
+msgid "increase click count"
+msgstr "увеличить количество кликов"
+
+#: src\index.tsx:95
+#, javascript-format
+msgid "${ clickCount } click"
+msgid_plural "${ clickCount } clicks"
+msgstr[0] "${ clickCount } клик"
+msgstr[1] "${ clickCount } клика"
+msgstr[2] "${ clickCount } кликов"
+

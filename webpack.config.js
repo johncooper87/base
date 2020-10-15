@@ -84,7 +84,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
   ],
 
-  watch: true,
+  //watch: true,
 
   // optimization: {
   //   chunkIds: 'named',
