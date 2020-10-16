@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer } from 'react';
-const { unstable_batchedUpdates } = require('react-dom');
+import { unstable_batchedUpdates } from 'react-dom';
 
 type UpdateFn = () => void;
 

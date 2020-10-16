@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { ProvidePlugin } = require('webpack');
 
 const cssLoader = {
   loader: 'css-loader',
@@ -13,9 +14,13 @@ const cssLoader = {
   },
 };
 
+const dev = !process.argv.includes('--mode=production');
+
+const styleLoader = dev ? MiniCssExtractPlugin.loader : 'style-loader';
+
 module.exports = {
 
-  mode: 'development',
+  mode: dev ? 'development' : 'production',
   devtool: 'source-map',
   target: 'web',
 
@@ -26,35 +31,30 @@ module.exports = {
 
       {
         test: /\.po$/,
-        use: [{
-          loader: path.resolve('po-loader.js'),
-        }]
+        // use: [{
+        //   loader: path.resolve('po-loader.js'),
+        // }],
+        use: ['json5-loader', 'po-gettext-loader']
       },
 
       {
         test: /\.ts(x?)$/,
         include: path.resolve(__dirname, './src'),
-        use: 'ts-loader'
+        use: 'ts-loader',
+        // use: {
+        //   loader: 'ts-loader',
+        //   options: {plugins: [['ttag', { extract: { output: 'template.pot'} }]]}
+        // }
       },
-
-      // {
-      //   test: /\.css$/,
-      //   use: ['style-loader', cssLoader],
-      // },
-
-      // {
-      //   test: /\.scss$/,
-      //   use: ['style-loader', cssLoader, 'sass-loader'],
-      // },
 
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, cssLoader],
+        use: [styleLoader, cssLoader],
       },
 
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, cssLoader, 'sass-loader'],
+        use: [styleLoader, cssLoader, 'sass-loader'],
       },
 
     ]
@@ -78,10 +78,20 @@ module.exports = {
   },
 
   plugins: [
+
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
+
     new MiniCssExtractPlugin(),
+
+    new ProvidePlugin({
+      t: ['ttag', 't'],
+      jt: ['ttag', 'jt'],
+      msgid: ['ttag', 'msgid'],
+      ngettext: ['ttag', 'ngettext'],
+    }),
+
   ],
 
   //watch: true,

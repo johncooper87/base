@@ -11,11 +11,15 @@
     "@types/webpack": "^4.41.22",
     "@types/webpack-dev-server": "^3.11.0",
     "@types/webpack-env": "^1.15.3",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
     "css-loader": "^5.0.0",
     "eslint": "^7.11.0",
     "html-webpack-plugin": "^4.5.0",
+    "json5-loader": "^4.0.1",
     "mini-css-extract-plugin": "^1.0.0",
     "nodemon": "^2.0.5",
+    "po-gettext-loader": "^1.0.0",
     "sass": "^1.27.0",
     "sass-loader": "^10.0.3",
     "style-loader": "^2.0.0",
@@ -30,7 +34,7 @@
   },
   "scripts": {
     "start": "nodemon --exec webpack serve",
-    "i18n": "ttag update src/i18n/ru.po src"
+    "i18n": "ttag update --discover=jt --discover=t --discover=msgid --discover=ngettext src/i18n/ru.po src"
   },
   "nodemonConfig": {
     "watch": [

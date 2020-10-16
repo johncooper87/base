@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles1 from './styles1.css';
-import { t, ngettext, msgid, addLocale, useLocale } from 'ttag';
+import { addLocale, useLocale } from 'ttag';
 import { useUpdate } from './internals/react-update-hook';
 
 const localizationSubscribers = new Set<() => void>();
@@ -34,7 +34,6 @@ export function useLocalization() {
 
 async function switchLang(lang: string) {
   if (lang === 'ru') {
-    //@ts-ignore
     const locale = await import('./i18n/ru.po');
     console.log(locale.default);
     addLocale(lang, locale.default);
